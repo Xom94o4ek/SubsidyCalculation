@@ -53,14 +53,9 @@ namespace SubsidyCalculation
         ///<summary>
         ///Метод, вызываемый при вводе некорректных данных и возникновении ошибки
         ///</summary>
-        private void NoCorrect(string message)
+        private void NoCorrect(string message, Exception e = null)
         {
-            Exception e = new Exception(message);
-            OnException?.Invoke(this, Tuple.Create(message, e));
-            throw e;
-        }
-        private void NoCorrect(string message, Exception e)
-        {
+            if (e == null) { e = new Exception(message); }
             OnException?.Invoke(this, Tuple.Create(message, e));
             throw e;
         }
